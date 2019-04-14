@@ -13,7 +13,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   avatar = "img/avatar.png"
 
 [Params]
-  subtitle = "Just another site" # Subtitle of your site
+  subtitle = "Economics and more" # Subtitle of your site
   description = "John Doe's Personal blog about everything" # Description of your site
   opengraph = true
   twitter_cards = false
