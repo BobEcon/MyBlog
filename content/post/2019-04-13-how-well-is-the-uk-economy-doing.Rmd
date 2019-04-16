@@ -20,7 +20,12 @@ knitr::opts_chunk$set(collapse = TRUE)
 A question which crops up repeatedly in political discussions concerns the macroeconomic performance of the UK economy since the ending of the Great Recession of 2008-09. To answer this question we (probably) need to examine the time path of **UK real GDP per head** both historically and in comparison with other similar industrialised nations.
 
 ## Real GDP per head
-Why real GDP per head? What exactly is that? GDP stands for Gross Domestic Product - it's a measure of the value of the total output of goods and services produced in an economy in a given period. Now in order to calculate the value of output of any firm or industry the government statisticians have to use the current prices of each product or service. This measure is known as GDP in current prices. But these prices change over time. So that presents a problem in determining whether the economy is producing a greater volume of goods and services in one period compared to another. Just comparing GDP in current prices in different periods won't tell us because this measure will change partly because of volume changes but also partly because of changes in prices. So in order to determine whether an economy is producing a greater or lesser volume of goods and services in one period compared to another we need a measure of GDP that removes the effects of changing prices: this is called Real GDP. (Technically, it involves measuring GDP at chained volume measures (CVM) rather than current prices)
+Why real GDP per head? What exactly is that? GDP stands for Gross Domestic Product - it's a measure of the value of the total output of goods and services produced in an economy in a given period. Now in order to calculate the value of output of any firm or industry the government statisticians have to use the current prices of each product or service. This measure is known as GDP in current prices. But these prices change over time. So that presents a problem in determining whether the economy is producing a greater volume of goods and services in one period compared to another. Just comparing GDP in current prices in different periods won't tell us because this measure will change partly because of volume changes but also partly because of changes in prices. So in order to determine whether an economy is producing a greater or lesser volume of goods and services in one period compared to another we need a measure of GDP that removes the effects of changing prices: this is called Real GDP. (Technically, it involves measuring GDP at chained volume measures (CVM) rather than current prices)^[A technical description of how GDP is calculated can be found in the [UK Blue Book](https://www.ons.gov.uk/economy/grossdomesticproductgdp/compendium/unitedkingdomnationalaccountsthebluebook/2018/anintroductiontotheuknationalaccounts) ]
+
+Many politicians and journalists look at the growth of real GDP as an indicator of macroeconomic performance, and in some cases this is valid. But real GDP will increase if a country experiences growth in its labour force (perhaps as a result of positive net migration), and this may not necessarily mean a rise in GDP per head of population. *It is real GDP per head that measures the average standard of living in a country*, so this is what we really ought to look at when assessing the growth performance of an economy.
+
+## UK Real GDP per head over time
+Here is a chart (Figure 1) showing the time path of quarterly UK real GDP per head since 1955Q1. There has been a gradual upward trend as average living standards have increased over time. There have also been periods of recession when growth has been negative, none more so than in the Great Recession of 2008 - 2009. The line is curving upwards indicating an exponential growth trend of some average percentage amount each quarter. To see this more clearly we can employ the standard technique of plotting the natural logarithm of the data. This turns an upward sloping exponential trend into a linear trend where the slope of the line equals the growth rate.
 
 ```{r include=FALSE}
 library(pdfetch)
@@ -29,7 +34,7 @@ library(ggplot2)
 library(dyn)
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.cap= "UK Real GDP per head"}
 data2 <- pdfetch_ONS("IHXW", "UKEA")
 data2 <- ts(data2, start = c(1955,1), frequency = 4)
 
