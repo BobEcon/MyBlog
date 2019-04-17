@@ -15,7 +15,7 @@ thumbnail: ''
 
 
 
-<p>A question which crops up repeatedly in political discussions concerns the macroeconomic performance of the UK economy since the ending of the Great Recession of 2008-09. To answer this question we (probably) need to examine the time path of <strong>UK real GDP per head</strong> both historically and in comparison with other similar industrialised nations.</p>
+<p>A question which crops up repeatedly in political discussions concerns the macroeconomic performance of the UK economy since the ending of the Great Recession of 2008-09. One way to answer this question is to examine the time path of <strong>UK real GDP per head</strong> both historically and in comparison with other similar industrialised nations.</p>
 <div id="real-gdp-per-head" class="section level2">
 <h2>Real GDP per head</h2>
 <p>Why real GDP per head? What exactly is that? GDP stands for Gross Domestic Product - it’s a measure of the value of the total output of goods and services produced in an economy in a given period. Now in order to calculate the value of output of any firm or industry the government statisticians have to use the current prices of each product or service. This measure is known as GDP in current prices. But these prices change over time. So that presents a problem in determining whether the economy is producing a greater volume of goods and services in one period compared to another. Just comparing GDP in current prices in different periods won’t tell us because this measure will change partly because of volume changes but also partly because of changes in prices. So in order to determine whether an economy is producing a greater or lesser volume of goods and services in one period compared to another we need a measure of GDP that removes the effects of changing prices: this is called Real GDP. (Technically, it involves measuring GDP at chained volume measures (CVM) rather than current prices)<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
@@ -23,17 +23,29 @@ thumbnail: ''
 </div>
 <div id="uk-real-gdp-per-head-over-time" class="section level2">
 <h2>UK Real GDP per head over time</h2>
-<p>Here is a chart (Figure 1) showing the time path of quarterly UK real GDP per head since 1955Q1. There has been a gradual upward trend as average living standards have increased over time. There have also been periods of recession when growth has been negative, none more so than in the Great Recession of 2008 - 2009. The line is curving upwards indicating an exponential growth trend of some average percentage amount each quarter. To see this more clearly we can employ the standard technique of plotting the natural logarithm of the data. This turns an upward sloping exponential trend into a linear trend where the slope of the line equals the growth rate.</p>
+<p>Here is a chart (Figure 1) showing the time path of quarterly UK real GDP per head since 1955Q1. There has been a gradual upward trend as average living standards have increased over time. There have also been periods of recession when growth has been negative, none more so than in the Great Recession of 2008 - 2009. The line is curving upwards indicating an exponential growth trend of some average percentage amount each quarter. To see this more clearly we can employ the standard technique of plotting the natural logarithm of the data. This turns an upward sloping exponential trend into a linear trend where the slope of the line equals the growth rate.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
 <div class="figure"><span id="fig:unnamed-chunk-2"></span>
 <img src="/post/2019-04-13-how-well-is-the-uk-economy-doing_files/figure-html/unnamed-chunk-2-1.png" alt="UK Real GDP per head" width="672" />
 <p class="caption">
 Figure 1: UK Real GDP per head
 </p>
 </div>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="/post/2019-04-13-how-well-is-the-uk-economy-doing_files/figure-html/unnamed-chunk-4-1.png" alt="UK Log Real GDP per head" width="672" />
+<p class="caption">
+Figure 2: UK Log Real GDP per head
+</p>
+</div>
+<p>Figure 2 shows the time path of the log of real GDP per head. The exponential tend has been straightened out into a linear trend. What’s now noticeable is that the trend growth rate from 1955Q1 to 2007Q4 (just before the start of the Great Recession) is higher than the growth rate since the end of the recession in 2009Q3. To find the average trend growth rate for the period 1955Q1 to 2007Q4 a line of best fit can be calculated and superimposed on the chart as shown. So between 1955Q1 and 2007Q4, real GDP per head in the UK grew on average by 0.58% per quarter (i.e. about 2.32% per year). There were periods when growth was higher than that (“booms”) and periods when it was lower (“recessions”). But over this period the economy tended to always get back to trend fairly quickly following these episodes of higher or lower growth. In particular, following a recession the economy <em>grew faster than trend</em> in order to get back to where it would have been had it just continued growing steadily at the average rate.</p>
+<p>The trend line has been extended to show where real GDP per head would have grown to if, following the end of the Great Recession, the UK economy economy had once again returned to this average growth path. It’s obvious that this time that has not happened. Rather than growing faster in order to catch back up to this long run trend real GDP per head has grown more slowly than the previous average such that the gap between actual and trend is large and widening. The average growth rate since 2009Q3 has been 0.3% per quarter (i.e. about 1.2% per year)</p>
+<p><span class="math display">\[
+Y_t=Y_0(1+r)^t
+\]</span></p>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
 <li id="fn1"><p>A technical description of how GDP is calculated can be found in the <a href="https://www.ons.gov.uk/economy/grossdomesticproductgdp/compendium/unitedkingdomnationalaccountsthebluebook/2018/anintroductiontotheuknationalaccounts">UK Blue Book</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Here’s the <a href="https://en.wikipedia.org/wiki/Exponential_growth#Reformulation_as_log-linear_growth">maths</a> if you want it.<a href="#fnref2">↩</a></p></li>
 </ol>
 </div>

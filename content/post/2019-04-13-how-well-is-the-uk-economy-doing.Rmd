@@ -17,7 +17,7 @@ thumbnail: ''
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-A question which crops up repeatedly in political discussions concerns the macroeconomic performance of the UK economy since the ending of the Great Recession of 2008-09. To answer this question we (probably) need to examine the time path of **UK real GDP per head** both historically and in comparison with other similar industrialised nations.
+A question which crops up repeatedly in political discussions concerns the macroeconomic performance of the UK economy since the ending of the Great Recession of 2008-09. One way to answer this question is to examine the time path of **UK real GDP per head** both historically and in comparison with other similar industrialised nations.
 
 ## Real GDP per head
 Why real GDP per head? What exactly is that? GDP stands for Gross Domestic Product - it's a measure of the value of the total output of goods and services produced in an economy in a given period. Now in order to calculate the value of output of any firm or industry the government statisticians have to use the current prices of each product or service. This measure is known as GDP in current prices. But these prices change over time. So that presents a problem in determining whether the economy is producing a greater volume of goods and services in one period compared to another. Just comparing GDP in current prices in different periods won't tell us because this measure will change partly because of volume changes but also partly because of changes in prices. So in order to determine whether an economy is producing a greater or lesser volume of goods and services in one period compared to another we need a measure of GDP that removes the effects of changing prices: this is called Real GDP. (Technically, it involves measuring GDP at chained volume measures (CVM) rather than current prices)^[A technical description of how GDP is calculated can be found in the [UK Blue Book](https://www.ons.gov.uk/economy/grossdomesticproductgdp/compendium/unitedkingdomnationalaccountsthebluebook/2018/anintroductiontotheuknationalaccounts) ]
@@ -25,7 +25,7 @@ Why real GDP per head? What exactly is that? GDP stands for Gross Domestic Produ
 Many politicians and journalists look at the growth of real GDP as an indicator of macroeconomic performance, and in some cases this is valid. But real GDP will increase if a country experiences growth in its labour force (perhaps as a result of positive net migration), and this may not necessarily mean a rise in GDP per head of population. *It is real GDP per head that measures the average standard of living in a country*, so this is what we really ought to look at when assessing the growth performance of an economy.
 
 ## UK Real GDP per head over time
-Here is a chart (Figure 1) showing the time path of quarterly UK real GDP per head since 1955Q1. There has been a gradual upward trend as average living standards have increased over time. There have also been periods of recession when growth has been negative, none more so than in the Great Recession of 2008 - 2009. The line is curving upwards indicating an exponential growth trend of some average percentage amount each quarter. To see this more clearly we can employ the standard technique of plotting the natural logarithm of the data. This turns an upward sloping exponential trend into a linear trend where the slope of the line equals the growth rate.
+Here is a chart (Figure 1) showing the time path of quarterly UK real GDP per head since 1955Q1. There has been a gradual upward trend as average living standards have increased over time. There have also been periods of recession when growth has been negative, none more so than in the Great Recession of 2008 - 2009. The line is curving upwards indicating an exponential growth trend of some average percentage amount each quarter. To see this more clearly we can employ the standard technique of plotting the natural logarithm of the data. This turns an upward sloping exponential trend into a linear trend where the slope of the line equals the growth rate.^[Here’s the [maths](https://en.wikipedia.org/wiki/Exponential_growth#Reformulation_as_log-linear_growth) if you want it.]
 
 ```{r include=FALSE}
 library(pdfetch)
@@ -41,3 +41,28 @@ data2 <- ts(data2, start = c(1955,1), frequency = 4)
 autoplot(data2) + ggtitle("UK GDP (average) per head, CVM market prices, SA\n1955Q1 - 2018Q4") + ylab("£, CVM") + xlab("") + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2000, y = 2500, label = "Source: ONS, code IHXW")
 ```
 
+```{r include=FALSE}
+lndata2 <- log(data2)
+lndata2
+trend2 <- time(lndata2)
+
+mod2 <- dyn$lm(window(lndata2, start=c(1955,1), end=c(2007,4)) ~ trend2)
+summary(mod2)
+newdata2 <- window(trend2, start=c(2008,1))
+extrap2 <- predict.dyn(mod2,newdata = newdata2)
+
+gdpcap <- cbind(lndata2,extrap2)
+colnames(gdpcap) <- c("Actual","Trend: 1955Q1-2007Q4")
+```
+
+```{r echo=FALSE, fig.cap= "UK Log Real GDP per head"}
+autoplot(gdpcap) + ggtitle("UK Log GDP (average) per head, CVM market prices, SA\n1955Q1 - 2018Q4") + ylab("log") + xlab("") + theme(legend.position = "bottom") + guides(colour=guide_legend(title=NULL)) + scale_x_continuous(limits=c(1950,2020), breaks=seq(1950,2020,by=10)) + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2000, y = 8.0, label = "Trend growth = 0.58 % per quarter")
+```
+
+Figure 2 shows the time path of the log of real GDP per head. The exponential tend has been straightened out into a linear trend. What’s now noticeable is that the trend growth rate from 1955Q1 to 2007Q4 (just before the start of the Great Recession) is higher than the growth rate since the end of the recession in 2009Q3. To find the average trend growth rate for the period 1955Q1 to 2007Q4 a line of best fit can be calculated and superimposed on the chart as shown. So between 1955Q1 and 2007Q4, real GDP per head in the UK grew on average by 0.58% per quarter (i.e. about 2.32% per year). There were periods when growth was higher than that (“booms”) and periods when it was lower (“recessions”). But over this period the economy tended to always get back to trend fairly quickly following these episodes of higher or lower growth. In particular, following a recession the economy *grew faster than trend* in order to get back to where it would have been had it just continued growing steadily at the average rate.
+
+The trend line has been extended to show where real GDP per head would have grown to if, following the end of the Great Recession, the UK economy economy had once again returned to this average growth path. It’s obvious that this time that has not happened. Rather than growing faster in order to catch back up to this long run trend real GDP per head has grown more slowly than the previous average such that the gap between actual and trend is large and widening. The average growth rate since 2009Q3 has been 0.3% per quarter (i.e. about 1.2% per year)
+
+$$
+Y_t=Y_0(1+r)^t
+$$

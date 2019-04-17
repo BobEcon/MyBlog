@@ -21,6 +21,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   authorbox = false
   post_navigation = true
   post_meta = ["date", "categories"] # Order of post meta information
+  mathjax = true # Enable MathJax
+  mathjaxPath = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" # Specify MathJax path
+  mathjaxConfig = "TeX-AMS-MML_HTMLorMML" # Specify MathJax config
 
 [Params.sidebar]
   home = "right"   # Configure layout for home page
