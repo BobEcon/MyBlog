@@ -71,7 +71,7 @@ From an historical viewpoint it’s fair to conclude that the performance of the
 The other question to consider is whether this reduced performance is unique to the UK. Have other advanced industrial nations also grown much more slowly since the Great Recession than in the past? And if so has the UK’s performance been better or worse?
 
 ## UK compared to other countries
-The UK is not unique in experiencing much lower growth since the end of the Great Recession. In fact, most other advanced industrial nations including the USA, Germany, France and Italy have suffered similarly, and for the same reasons (almost certainly) as the UK. Take for example the US. Figure 3 shows the time path of log real GDP per head with the trend growth line for 1955Q1 to 2007Q4 superimposed. As can be seen the picture is very similar to that of the UK.
+The UK is not unique in experiencing much lower growth in average living standards since the end of the Great Recession. In fact, most other advanced industrial nations including the USA, Germany, France and Italy have suffered similarly, and for the same reasons (almost certainly) as the UK. Take for example the US. Figure 3 shows the time path of log real GDP per head with the trend growth line for 1955Q1 to 2007Q4 superimposed. As can be seen the picture is very similar to that of the UK.
 
 ```{r include=FALSE}
 USgdpcap <- pdfetch_FRED("A939RX0Q048SBEA")
@@ -97,3 +97,16 @@ colnames(gdpcap3) <- c("Actual","Trend: 1955Q1-2007Q4")
 ```{r echo=FALSE, fig.cap= "US Log Real GDP per head"}
 autoplot(gdpcap3) + ggtitle("US Log GDP per head, Chained 2012 dollars, SAAR\n1955Q1 - 2018Q4") + ylab("log") + xlab("") + theme(legend.position = "bottom") + guides(colour=guide_legend(title=NULL)) + scale_x_continuous(limits=c(1950,2020), breaks=seq(1950,2020,by=10)) + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2000, y = 10, label = "Source: FRED")
 ```
+
+So, given that this phenomenon is not exclusive to the UK, how does the UK’s performance compare. Figure 4 shows how annual real GDP per head has grown since 2009. It compares the UK with a range of other advanced economies plus the Euro area (12 countries).^[Austria, Belgium, Finland, France, Germany, Ireland, Italy, Luxembourg, Netherlands, Portugal, Spain, Greece] Compared to France, Italy (especially) and the Euro 12 area as a whole the UK has done reasonably well. However, its performance has lagged behind Germany and the US. Whether or not the UK economy should have performed as weals those two latter countries is open to debate.
+
+```{r include=FALSE}
+library(readxl)
+Real_GDP_per_head_2009_2018 <- read_excel("~/OneDrive/Documents/Macro Data/Eurostat Data/Real GDP per head 2009-2018.xlsx")
+rgdphead <- ts(Real_GDP_per_head_2009_2018[,-1], start = 2009)
+```
+
+```{r echo=FALSE, fig.cap= "Real GDP per head, various countries"}
+autoplot(rgdphead, lwd=1.2) + ggtitle("Real GDP per head, annual CVM, 2009-2018\n(2009=100)") + ylab("Index") + xlab("") + theme(legend.position = "bottom") + guides(colour=guide_legend(title=NULL)) + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2011, y = 115, label = "Source: Eurostat, FRED") + scale_color_brewer(palette = "Set1")
+```
+
