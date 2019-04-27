@@ -1,0 +1,64 @@
+---
+title: Did joining the EC/EU benefit the UK economy?
+author: Bob Beachill
+date: '2019-04-22'
+slug: did-joining-the-ec-eu-benefit-the-uk-economy
+categories:
+  - UK Economy
+  - EU
+tags:
+  - GDP
+  - growth
+  - UK
+  - EU
+description: ''
+thumbnail: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+```{r include=FALSE}
+library(forecast)
+library(ggplot2)
+library(readxl)
+```
+
+Given all the discussion about whether leaving the European Union will cause long run harm to the UK economy, it is instructive to look at the impact that joining the EU (or European Community (EC) as it then was) back in 1973 had on the UK’s long run economic performance.
+
+## How to assess the impact?
+Obviously to carry out a detailed assessment and evaluation of the impact that joining the EC/EU had on the UK economy would involve a huge amount research and analysis looking at the effect on various sectors and industries. All I intend to do here is simply to look at the growth in average living standards, measured by real GDP per head, in the UK before and after the UK’s accession. But just comparing growth before and after accession isn’t sufficient as we don’t know how the UK economy would have performed if the UK had not joined. Just because, say, growth improved after 1973 doesn’t necessarily mean joining the EC/EU was beneficial as growth might have improved anyway, and maybe even more so. Plus there will be other factors at work affecting growth after 1973 (and before). One way to approach this issue, which I think is valid, is to to look at *comparative growth*, i.e. compare the UK’s growth record with that of other similar countries before and after its accession. These countries, specifically Germany, France and Italy are all in the EC/EU throughout the entire period. Thus, if the factors which affect growth are experienced by all the countries being compared then we have a kind of controlled, natural experiment where the only significant difference between them in the before and after periods is UK membership. It is therefore possible, albeit not certain, to ascribe at least some of the change in the UK’s growth record after accession to its membership.
+
+## UK growth before joining in 1973
+So what does the data show? Figure 1 compares growth in annual real GDP per head of West Germany (as it then was), France, Italy and, of course, the UK. The source this data is the [Annual Macroeconomic Database of the European Commission (AMECO)](http://ec.europa.eu/economy_finance/ameco/user/serie/SelectSerie.cfm){target=“_blank”}. The data is GDP per head of population at constant prices (code RVGDP). I have indexed the data to a base of 1960 (the earliest date available) and shown the time path up to 1973 which is the year of the UK’s accession to the EC.
+
+```{r include=FALSE}
+uk_euro <-
+  read_excel("~/OneDrive/Documents/Macro Data/Eurostat Data/uk_euro.xlsx",
+             range = "A1:D15")
+uk_euro_before <- ts(uk_euro, start = 1960)
+```
+
+
+```{r echo=FALSE, fig.cap="Real GDP per head, 1960-73"}
+autoplot(uk_euro_before, lwd=1.1) + ggtitle("Real GDP per head, annual CVM, 1960-1973\n(1960=100)") + ylab("Index") + xlab("") + theme(legend.position = "bottom") + guides(colour=guide_legend(title=NULL)) + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 1963, y = 160, label = "Source: AMECO, Code RVGDP")
+```
+
+What can easily be seen is that during this period the UK economy suffered economic decline relative to the other three major European economies. The UK’s real GDP per head grew by 45% (annual average growth rate of 2.89%) from 1960 through to 1973, whereas for West Germany the growth rates were 56% (3.46%), for Italy 81% (4.65%), and for France 79% (4.58%). In consequence, the gap narrowed between the levels of real GDP per head of these three countries and the UK. It did not necessarily mean that by 1973 their average standard of living had overtaken the UK, given that they all started from different levels. In fact, as Figure 3 below shows, by 1973 only Italy’s real GDP per head was still below that of the UK (and only marginally).
+
+Can we blame this relative decline of the UK economy on its non-membership of the EC unlike the other countries? With certainty, definitely not. But this evidence is surely suggestive, and it would be difficult to contend that it was not an important factor. In fact it can be [argued](https://voxeu.org/article/britain-s-eu-membership-new-insight-economic-history){target=“_blank”} it was the desire to stop and, hopefully, reverse this comparative decline that was the principal reason behind the determination of the Heath-led conservative government to join the EC.^[I’m old enough to have been around at the time and remember this being one of the key arguments in favour of seeking membership]
+
+## UK growth after joining
+Let’s look now at the corresponding data for the period after the UK’s accession. Figure 2 shows the time path of real GDP per capita for the period 1974 to 2018. Again the data has been indexed to a base of 1974 for each country.
+
+```{r include=FALSE}
+uk_euro1 <- read_excel("~/OneDrive/Documents/Macro Data/Eurostat Data/uk_euro.xlsx", 
+                      range = "F1:I46")
+uk_euro_after <- ts(uk_euro1, start = 1974)
+```
+
+```{r echo=FALSE, fig.cap="Real GDP per head, 1974-2018"}
+autoplot(uk_euro_after, lwd=1.1) + ggtitle("Real GDP per head, annual CVM, 1974-2018\n(1974=100)") + ylab("Index") + xlab("") + theme(legend.position = "bottom") + guides(colour=guide_legend(title=NULL)) + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 1985, y = 200, label = "Source: AMECO, Code RVGDP")+ geom_vline(xintercept=1999, colour = "blue") + annotate("label", x = 1999, y = 110, label = "Euro")
+```
+
