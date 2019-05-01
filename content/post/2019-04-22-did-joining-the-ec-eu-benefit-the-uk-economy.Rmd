@@ -62,3 +62,26 @@ uk_euro_after <- ts(uk_euro1, start = 1974)
 autoplot(uk_euro_after, lwd=1.1) + ggtitle("Real GDP per head, annual CVM, 1974-2018\n(1974=100)") + ylab("Index") + xlab("") + theme(legend.position = "bottom") + guides(colour=guide_legend(title=NULL)) + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 1985, y = 200, label = "Source: AMECO, Code RVGDP")+ geom_vline(xintercept=1999, colour = "blue") + annotate("label", x = 1999, y = 110, label = "Euro")
 ```
 
+The contrast with the pre-accession period is striking and significant. Since joining, the UK economy has grown in line with the other three countries and indeed it has outpaced them since the late 1990s, especially since the introduction of the monetary union in 1999.^[Most macroeconomists would agree that the UK made the correct decision to not adopt the Euro as its currency.] Over the entire 45 year period the UK’s average standard of living grew by 117% (annual average growth rate of 1.78%). The figures for Germany^[West Germany until 1990] are 89% (1.46%), for Italy 72% (1.24%), and France 84% (1.39%). So since joining the UK has managed to reverse some of the relative economic decline it experienced before 1973. Again, we cannot be certain that this improvement in its relative performance is solely or even primarily down to it “joining the club”; perhaps it would have happened anyway, or have been even better if the UK had remained outside the EC/EU. But given the significant difference between pre and post accession relative growth it would very difficult to argue, I think, that the UK’s membership was not a major, if not the major, cause of this difference.
+
+Two other points of note are:
+
+* The impact on Germany’s real GDP per head of reunification in 1990 is clear to see
+* The impact of the Great Recession of 2008-09 on the growth of average living standards is also very apparent
+
+## Average living standards before and after
+A final way to see the overall impact on the UK is to compare the average living standard in the UK to the other three countries examined here both before its accession to the EC/EU and today. Figure 3 shows the ratio of each country’s GDP per head (measured in current prices and converted to US dollars using purchasing power parity exchange rates^[PPPs are used to ensure that one dollar buys the same amount of goods in each country. A succinct explantion [here](https://www.economicsonline.co.uk/Global_economics/Purchasing_power_parity.html){target=“_blank”}. More detail [here](https://en.wikipedia.org/wiki/Purchasing_power_parity){target=“_blank”}.]) to the UK in 1972 and 2018. The data is taken from the [OCED.Stat](https://stats.oecd.org){target=“_blank”} site.
+
+In 1972, the UK’s average standard of living was below that of France and West Germany and almost identical to Italy. In 2018, after 45 years of membership, the UK’s GDP per head is now above that of France, albeit marginally, well above Italy, but still lower than Germany.
+
+```{r include=FALSE}
+GDP_per_head_PPS <- read_excel("~/OneDrive/Documents/OECD Data/GDP per head PPS.xlsx", 
+    range = "L9:N17", col_types = c("text", 
+        "text", "numeric"))
+```
+
+```{r echo=FALSE, fig.cap="Ratio to UK GDP per head (Source: OECD)"}
+ggplot(GDP_per_head_PPS, aes(x=Year, y=RatioUK, fill = Country)) +
+  geom_bar(position = "dodge", stat = "identity", colour = "black") + ggtitle("Ratio to UK GDP per head, 1972 & 2018\n(US dollars, current prices, PPPs)") + ylab("Ratio") + xlab("") + guides(colour=guide_legend(title=NULL)) + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + scale_y_continuous(limits = c(0,1.4))
+```
+
