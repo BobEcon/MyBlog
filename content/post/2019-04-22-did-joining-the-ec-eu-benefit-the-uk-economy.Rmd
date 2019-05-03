@@ -23,6 +23,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 library(forecast)
 library(ggplot2)
 library(readxl)
+library(gganimate)
 ```
 
 Given all the discussion about whether leaving the European Union will cause long run harm to the UK economy, it is instructive to look at the impact that joining the EU (or European Community (EC) as it then was) back in 1973 had on the UK’s long run economic performance.
@@ -81,7 +82,8 @@ GDP_per_head_PPS <- read_excel("~/OneDrive/Documents/OECD Data/GDP per head PPS.
 ```
 
 ```{r echo=FALSE, fig.cap="Ratio to UK GDP per head (Source: OECD)"}
-ggplot(GDP_per_head_PPS, aes(x=Year, y=RatioUK, fill = Country)) +
-  geom_bar(position = "dodge", stat = "identity", colour = "black") + ggtitle("Ratio to UK GDP per head, 1972 & 2018\n(US dollars, current prices, PPPs)") + ylab("Ratio") + xlab("") + guides(colour=guide_legend(title=NULL)) + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + scale_y_continuous(limits = c(0,1.4))
+p <- ggplot(GDP_per_head_PPS, aes(x=Year, y=RatioUK, fill = Country)) +
+  geom_bar(position = "dodge", stat = "identity", colour = "black") + ggtitle("Ratio to UK GDP per head, 1972 & 2018\n(US dollars, current prices, PPPs)") + ylab("Ratio") + xlab("") + guides(colour=guide_legend(title=NULL)) + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + scale_y_continuous(limits = c(0,1.4)) + transition_states(Year) + shadow_mark()
+animate(p, duration = 3, renderer = gifski_renderer(loop = F))
 ```
 
