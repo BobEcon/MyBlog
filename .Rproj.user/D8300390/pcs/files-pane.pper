@@ -1,5 +1,5 @@
 {
-    "path" : "~/myblog",
+    "path" : "~/myblog/content/post",
     "sortOrder" : [
         {
             "ascending" : false,
