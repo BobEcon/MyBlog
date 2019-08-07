@@ -61,13 +61,78 @@ autoplot(UKNetDebt) + ggtitle("UK Public Sector Net Debt as % of GDP\n(excl publ
 
 Looking at Figure 2 showing the time path of the debt/GDP ratio, from a comparative high of 55.8% at the end of financial year 1974-75 the ratio gradually declined until the onset of the Great Recession, but again with noticeable fluctuations. At the end of 2007-08 it was 35.2%, but having been as low as 24.2% at financial year end 1990-91. The dramatic rise in the debt ratio as a consequence of the Great Recession and its aftermath is obvious and clear to see. The ratio increased year after year and until it reached a peak of 85.1% at year-end March 2017. This significant rise is of course linked, and indeed a direct consequence of, the rise in the deficit ratio. The link between the deficit and the debt ratios is, however, not one-to-one. Notice that although the deficit/GDP ratio has been reduced considerably from its peak of 9.9% down to 1.1% in financial year ending March 2019, the debt/GDP ratio has remained at its very high level, only falling slightly to 83.1% by the end of March 2019.
 
-Why has the debt ratio remained high despite the significant fall in the deficit ratio? The answer lies in the fact that changes in the deficit only affect directly the numerator of the debt/GDP ratio. What happens to GDP is also of equal importance. If the debt level increases by say 2% this will only reduce the debt/GDP ratio if GDP grows by more than 2%. And although reducing the government deficit will reduce the growth in debt, it can also affect the growth in GDP, at least in the short run, because the increases in taxation and/or reductions in government spending necessary to reduce the deficit will depress total spending in the economy^[Assuming other components of total spending such as consumer spending, business investment, and exports do not increase to compensate. There is still considerable debate in macroeconomics over this issue.] and hence how much output firms in the economy will produce. Many macroeconomists would argue that when the economy is in a major slump, trying to reduce the debt/GDP ratio by reducing the deficit will not work, as it is [self-defeating](https://voxeu.org/article/self-defeating-austerity); when private spending is depressed, reducing public spending too will simply prolong the recession such the the debt/GDP ratio will not fall, and could even increase.
+Why has the debt ratio remained high despite the significant fall in the deficit ratio? The answer lies in the fact that changes in the deficit only affect directly the numerator of the debt/GDP ratio. What happens to GDP is also of equal importance. If the debt level increases by say 2% this will only reduce the debt/GDP ratio if GDP grows by more than 2%. And although reducing the government deficit will reduce the growth in debt, it can also affect the growth in GDP, at least in the short run, because the increases in taxation and/or reductions in government spending necessary to reduce the deficit will depress total spending in the economy^[Assuming other components of total spending such as consumer spending, business investment, and exports do not increase to compensate. There is still considerable debate in macroeconomics over this issue.] and hence how much output firms in the economy will produce. Many macroeconomists would argue that when the economy is in a major slump, trying to reduce the debt/GDP ratio by reducing the deficit will not work, as it is [self-defeating](https://voxeu.org/article/self-defeating-austerity); when private spending is depressed, reducing public spending too will simply prolong the recession such that the debt/GDP ratio will not fall, and could even increase.
 
 ## Dynamics of deficits and debt
-Given that changes in the deficit affect the level of debt, it’s not surprising there is a specific mathematical relationship over time between the deficit/GDP ratio and the debt/GDP ratio. This relationship is known as the government’s (dynamic) budget constraint. As an equation it looks like this:
+Given that changes in the deficit affect the level of debt, it’s not surprising there is a specific mathematical relationship over time between the deficit/GDP ratio and the debt/GDP ratio. This relationship is known as the government’s (dynamic) budget constraint. As an equation^[The derivation is as follows:   
+The government's budget constraint is
+$$
+\dot{B}=(G-T)+rB
+$$
+i.e. the change in the debt (value of bonds) is equal to the deficit. Dividing through by GDP (Y) gives:
+$$
+\frac{\dot{B}}{Y}=(g-t)+rb
+$$
+where
+$$
+b=\frac{B}{Y},\ \ g=\frac{G}{Y},\ \ t=\frac{T}{Y}
+$$
+Now
+$$
+\dot{b}=\frac{d}{dt}\left(\frac{B}{Y}\right)=\frac{\dot{B}Y-B\dot{Y}}{Y^2}=\frac{\dot{B}}{Y}-bx
+$$
+where
+$$x=\frac{\dot{Y}}{Y}\ \ \ \ \ (\text{the growth rate of GDP})$$
+Substituting this into the previous equation, rearranging and collecting terms, gives the equation showing the evolution of the debt/GDP ratio
+$$
+\dot{b}=(g-t)+(r-x)b
+$$
+]
+it looks like this:
 
 $$
 \dot{b}=(g-t)+(r-x)b
 $$
 
 Here *b* is the debt/GDP ratio, (*g* - *t*) is the primary deficit^[The primary deficit is the difference between total tax revenue (*t*) and government spending on goods and services only (*g*). So it does not include debt interest payments - they are included elsewhere in the budget constraint.] to GDP ratio, *r* is the nominal interest rate on government bonds (i.e. the interest rate they pay to holders of the debt), and *x* is the growth rate of money GDP
+
+The equation shows how the debt/GDP ratio (*b*) evolves over time in response to changes in government spending (*g*), taxation (*t*), the interest rate on government debt (*r*), and growth in GDP (*x*) Mathematically, it’s known as a first order differential equation! And if (*g-t*) and (*r-x*) are constant values, it’s possible to trace out the time path of b.^[The relevant mathematics is explained [here](https://mjo.osborne.economics.utoronto.ca/index.php/tutorial/index/1/fle/t)] In particular, if (r-x) is negative, because the growth rate of GDP is greater than the interest rate paid on government debt, the value of b will converge to a long run, stable value. Importantly, this will be the case even if (g-t) is positive, i.e the government continually runs a primary deficit.
+Here's a numeric example; here, starting from a debt/GDP ratio of 80%, the government runs a primary deficit each period of 1% of GDP. whilst the growth of GDP exceeds the interest rate by 5 percentage points. Over time the debt ratio declines, fairly quickly at first, to a stable long run level of 20%.
+
+```{r echo=FALSE}
+b <- 0.8
+for (t in 1:200) {
+  b[t+1] <- 0.6*exp(-0.05*t) + 0.2
+}
+period <- 0:200
+debt_GDP <- b
+data <- data.frame(period, debt_GDP)
+ggplot(data, aes(period,debt_GDP)) + geom_line() + ggtitle("Example time path of debt/GDP ratio") + ylab("Percent") + xlab("Period") + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 100, y = 0.6, label = "Initial ratio = 0.8\n(g-t) = 0.01\n(x-r) = 0.05")
+```
+
+This might appear odd. How can the government continually run a deficit, implying more borrowing, and yet stabilise the debt ratio? The reason is that increases in debt only increase the numerator of the debt/GDP ratio; what matters too is what is happening to the denominator, GDP. If this is increasing faster than the debt, then the debt ratio will fall. This is why the growth rate of GDP is so important, and as just noted, it must exceed the interest rate paid on government debt.
+
+Of course, in reality, governments will not have the same primary deficit each period, nor will the gap between the GDP growth rate and the interest rate stay the same. So a better way to use this dynamic budget constraint is to calculate what size of budget deficit is required to either keep the debt ratio stable, or reduce it. A little bit of mathematics^[A stable debt/GDP implies $\dot{b}=0$. In which case,
+$$
+(g-t+rb)=xb
+$$
+] shows us that to keep the debt/GDP ratio constant a government must run a deficit to GDP equal to the current debt/GDP ratio multiplied by the growth rate of GDP. So, for example, if the current debt ratio is 80% (0.80), and the growth rate of GDP over the next period is 3% (0.03), the government could run a deficit of 2.4% (0.024 = 0.03 x 0.80) of GDP over the next period and the debt ratio would remain at 80%. Clearly, a deficit ratio of less than 2.4% would cause the debt ratio to fall, whilst a deficit of more than 2.4% of GDP would increase it.
+
+Looking back at figures 1 and 2, it's aparent that, although the UK's defcit/GDP ratio was falling from 2009-10 onwards, it wasn't enough to bring down the debt ratio until the last two financial years. The reason is the low rate of growth of nominal (current price) GDP. The average growth rate over the period 2010 to 2018 was 3.6%. With a debt ratio of around 75%, a deficit/GDP of around 2.7% would keep the debt/GDP stable. From 2010-11 to 2015-16 the deficit/GDP ratio was 8.5, 7.0, 7.0, 5.5, 4.8, and 3.8. Hence the rising debt ratio. In the last two financial years the deficit has been, respectively, 2.0% and 1.1% of GDP. Consequently, the debt as a percentage of GDP has begun to fall, albeit slowly.
+
+## Is a large deficit or debt bad  for the economy?
+Following the large increase, in many countries, in government deficits and debt during 2008 to 2010, there was a lot of discussion in the media about the supposed disastrous impact on the economy if they were not brought down immediately. Dire predictions were made about the the country going “bankrupt”, or the government having to default on its debt, or interest rates going through the roof. The vast majority of macroeconomists considered such predictions to be alarmist and inaccurate. And history has proven them to be correct.
+
+There are three ways in which large and increasing government deficits and debt could have an adverse effect on the economy: higher interest rates, higher inflation, lower economic growth. In all three cases, the possible adverse impact only really applies when the economy is operating at or close to full employment; in times of, especially severe, recession larger deficits and more government borrowing can be beneficial as they help sustain the level of aggregate spending in the economy (a point emphasised earlier).
+
+Increased government borrowing in normal (non-recession) times means the government is competing with the private sector for funds. This can lead to increases in long term interest rates which might cause private sector investment spending (on new capital equipment and housing) to fall. This is known as “crowding out”. But when the economy is in a recession or depression, private spending is necessarily reduced and much saving is not being utilised. Hence, governments can easily borrow more without having to pay higher rates of interest. But won’t purchasers of government debt nonetheless demand higher returns to compensate for an increased risk of default? Not if the country has its own currency. The government of a country that has its own currency, such as the UK, can **never** go bankrupt, nor does it have to default on its debt, as it can always borrow from its central bank. In other words, the central bank can create new money in order to purchase government bonds and thus redeem the debt.
+
+“Monetisation” of the debt via increasing the money supply, is the second way in which larger deficits could adversely impact the economy. This is because an increased rate of growth of the money supply could generate much higher inflation. Again, however, this is unlikely to be a problem when the economy is in a severe slump like the Great Recession. The reason is that, in a slump, interest rates will be very low. In fact, short term interest rates may very well be effectively zero^[what economists call the "zero lower bound"]. Thus holders of government debt are happy to swap their low yielding assets for the safer asset of money. Nor will these extra holdings of money be spent, they will be held as assets. The upshot is that this increase in the money stock does not lead to higher spending and inflation.
+
+The empirical evidence on long run interest rates, the money supply and inflation in the period since government deficits and debt levels began to rise significantly confirms these predictions. Long run interest rates have not risen, indeed they have fallen to historically low levels; inflation has not increased, on the contrary it has been subdued. The following chart shows how the massive rise in the monetary base (M0)^[M0 is a measure of the money supply consisting of notes and coin in circulation plus central bank reserves. For an excellent discussion of the different money magnitudes and the process of money creation in a modern economy, see the first two articles in the Bank of England's Quarterly Bulletin, 2014 Q1, Vol. 54 No. 1 [here](https://www.bankofengland.co.uk/quarterly-bulletin/2014/q1/money-in-the-modern-economy-an-introduction) and [here](https://www.bankofengland.co.uk/quarterly-bulletin/2014/q1/money-creation-in-the-modern-economy)] of the UK, resulting from the Bank of England’s policy of *quantitative easing(QE)*^[QE is where the central bank purchases government bonds from, mainly,non-financial companies such as pension funds and insurance companies. This directly increases the commecial bank deposits of the companies and the central bank reserves of those commercial banks. The Bank of England has up to this point carried out [£435 billion of QE](https://www.bankofengland.co.uk/monetary-policy/quantitative-easing)], did not lead to a huge rise in inflation.
+
+![](/post/2019-06-22-some-facts-and-myhs-about-government-deficits-and-debt_files/UK M0 v Core Inflation.png)
+
+This next chart shows how the interest rate on 10 year UK government bonds has actually continued to fall despite the massive increase in the debt/GDP ratio.
+
+![](/post/2019-06-22-some-facts-and-myhs-about-government-deficits-and-debt_files/UK gilt yields v Debt ratio.png)
