@@ -23,7 +23,7 @@ library(pdfetch)
 library(readxl)
 ```
 
-Ever since the Great Recession, and the policies which many government’s enacted in response, led to a significant rise in their deficits and debt, there has been repeated discussion about the nature and sustainability of public finances. Unfortunately, much of this discussion has been ill-informed  and confused. In this post, I will attempt to give a clear explanation of what the government deficit and debt levels are, how they are connected, and how they evolve over time.
+Ever since the Great Recession, and the policies which many government’s enacted in response, led to a significant rise in their deficits and debt, there has been repeated discussion about the nature and sustainability of public finances. Unfortunately, much of this discussion has been ill-informed  and confused. In this post, I will attempt to give a clear explanation of what the government deficit and debt levels are, how they are connected, and how they evolve over time. I'll also look at when and how large and rising deficits and debt can be bad for the economy.
 
 ## What is the deficit, what is the debt?
 Some people, including journalists and politicians, sometimes confuse the government’s deficit with its debt.
