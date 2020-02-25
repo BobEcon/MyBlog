@@ -40,8 +40,8 @@ These sound enormous figures and politicians and other commentators often use th
 When it comes to the deficit and debt of the government, its income is effectively national income, i.e. GDP, as it is this which constitutes the tax base. The larger is GDP the more taxation revenue the government could potentially raise in order to service and pay off the debt. Hence, the larger is GDP for any given absolute level of debt, the lower the burden of the debt on the public finances^[A similar argument applies to the deficit]. Again, according to the [UK Office of National Statistics (ONS)](https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/april2019), public sector net debt (excluding public sector banks) was 82.7% of GDP at the end of April 2019, whilst public sector borrowing (the deficit) in the latest full financial year (April 2018 to March 2019) was 1.1% of GDP.
 
 ## Deficit and Debt over time
-Are these UK deficit and debt ratios particularly high compared to the past? Looking at the historical record, the charts below show the deficit (net borrowing) and debt ratios, from 1956 for the deficit and from 1975 for the debt^[Earlier figures for the debt ratio are not available on the ONS site].
-
+Are these UK deficit and debt ratios particularly high compared to the past? Looking at the historical record, the charts below show the deficit (net borrowing) and debt ratios, from 1956 for the deficit and from 1975 for the debt^[Earlier figures for the debt ratio are not available on the ONS site].    
+   
 ```{r echo=FALSE, fig.cap="UK Deficit/GDP ratio", message=FALSE}
 UKdefcitgdp <- pdfetch_ONS("J5IJ","PUSF")
 UKdefcitgdp <- na.omit(UKdefcitgdp)
@@ -64,7 +64,7 @@ Looking at Figure 2 showing the time path of the debt/GDP ratio, from a comparat
 Why has the debt ratio remained high despite the significant fall in the deficit ratio? The answer lies in the fact that changes in the deficit only affect directly the numerator of the debt/GDP ratio. What happens to GDP is also of equal importance. If the debt level increases by say 2% this will only reduce the debt/GDP ratio if GDP grows by more than 2%. And although reducing the government deficit will reduce the growth in debt, it can also affect the growth in GDP, at least in the short run, because the increases in taxation and/or reductions in government spending necessary to reduce the deficit will depress total spending in the economy^[Assuming other components of total spending such as consumer spending, business investment, and exports do not increase to compensate. There is still considerable debate in macroeconomics over this issue.] and hence how much output firms in the economy will produce. Many macroeconomists would argue that when the economy is in a major slump, trying to reduce the debt/GDP ratio by reducing the deficit will not work, as it is [self-defeating](https://voxeu.org/article/self-defeating-austerity); when private spending is depressed, reducing public spending too will simply prolong the recession such that the debt/GDP ratio will not fall, and could even increase.
 
 ## Dynamics of deficits and debt
-Given that changes in the deficit affect the level of debt, it’s not surprising there is a specific mathematical relationship over time between the deficit/GDP ratio and the debt/GDP ratio. This relationship is known as the government’s (dynamic) budget constraint. As an equation^[The derivation is as follows:   
+Given that changes in the deficit affect the level of debt, it’s not surprising there is a specific mathematical relationship over time between the deficit/GDP ratio and the debt/GDP ratio. This relationship is known as the government’s (dynamic) budget constraint. The derivation is as follows:   
 The government's budget constraint is
 $$
 \dot{B}=(G-T)+rB
@@ -82,17 +82,14 @@ $$
 \dot{b}=\frac{d}{dt}\left(\frac{B}{Y}\right)=\frac{\dot{B}Y-B\dot{Y}}{Y^2}=\frac{\dot{B}}{Y}-bx
 $$
 where
-$$x=\frac{\dot{Y}}{Y}\ \ \ \ \ (\text{the growth rate of GDP})$$
+$$x=\frac{\dot{Y}}{Y}$$
+is the growth rate of GDP
+
 Substituting this into the previous equation, rearranging and collecting terms, gives the equation showing the evolution of the debt/GDP ratio
 $$
 \dot{b}=(g-t)+(r-x)b
 $$
-]
-it looks like this:
 
-$$
-\dot{b}=(g-t)+(r-x)b
-$$
 
 Here *b* is the debt/GDP ratio, (*g* - *t*) is the primary deficit^[The primary deficit is the difference between total tax revenue (*t*) and government spending on goods and services only (*g*). So it does not include debt interest payments - they are included elsewhere in the budget constraint.] to GDP ratio, *r* is the nominal interest rate on government bonds (i.e. the interest rate they pay to holders of the debt), and *x* is the growth rate of money GDP
 

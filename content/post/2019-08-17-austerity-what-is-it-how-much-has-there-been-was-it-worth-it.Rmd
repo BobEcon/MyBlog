@@ -1,0 +1,48 @@
+---
+title: Austerity; What is it, how much has there been, was it worth it?
+author: Bob Beachill
+date: '2019-08-17'
+slug: austerity-what-is-it-how-much-has-there-been-was-it-worth-it
+categories:
+  - UK Economy
+  - Government
+tags:
+  - Fiscal Policy
+  - UK
+description: ''
+thumbnail: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+```{r include=FALSE}
+library(forecast)
+library(ggplot2)
+library(pdfetch)
+library(readxl)
+UK_Austerity <- read_excel("~/OneDrive/Documents/Blog Posts data/UK Austerity.xlsx")
+colnames(UK_Austerity) <- c("Year","rcexp","rnetinv","cycpbal","cexpgdp","netinvgdp","cycpbalgdp","ukpop")
+UKAust <- ts(UK_Austerity[,-1], start = 1955)
+UKAust75 <- window(UKAust, start = 1975)
+```
+
+One of the most controversial, and hotly debated concepts in economics in recent years is austerity. In this post I will consider what the term “austerity” actually means in economics, and I’ll examine the available evidence on the manner and extent of austerity that has taken place in the UK since 2010. I will also briefly look at austerity in other countries.
+
+## What’s the definition of austerity?
+Sometimes the term austerity is used in a general sense to refer to difficult economic conditions when shortages and rationing of goods might be imposed. This was the case in the UK and other countries after the second world war. However, the more recent usage of the term refers to the fiscal consolidations enacted by several countries following the Great Recession. These consolidations involved reductions in public expenditure and/or increases in taxation in order to try to reduce the government’s deficit and debt. But should all fiscal contractions always be regarded as austerity? Not necessarily. As with many macroeconomic policies it depends on the current state of the economy. If an economy is operating at close to full employment or experiencing a boom, some fiscal consolidation might be required to reduce inflationary pressures or to free resources to be used by the private sector. The term austerity is better reserved for a fiscal contraction undertaken when an economy is suffering from a recession or a depression. Such a consolidation is likely to make the recession/depression worse as it reduces aggregate spending in the economy still further^[Unless you believe in the theory of "expansionary austerity"], unless it can be countered by a more expansionary monetary policy (i.e. a cut in interest rates). Simon Wren-Lewis, a well known macroeconomist, [defines austerity](https://mainlymacro.blogspot.com/2017/09/defining-austerity-redux.html) in this way. His preferred definition of austerity is:
+
+>“fiscal consolidation/spending cuts that have a negative impact on aggregate demand which monetary policy is unable to offset.”
+
+So using this definition it’s clear that the fiscal consolidations undertaken by several governments from 2010 onwards would qualify as austerity policies. They were contractionary on demand, and because central banks had already reduced interest rates to effectively zero^[What economists call the “zero lower bound (ZLB)”], the negative impact on aggregate spending could not be offset.
+
+## How much austerity has taken place?
+The evidence on austerity measures in the UK will be examined here. The data used is all taken from the UK Office for Budget Responsibility’s [Public finances databank](https://obr.uk/data/). The focus will be on public expenditure rather than taxation revenue as this is where most of the austerity measures have been concentrated. But fiscal consolidation can and does also include increases in taxation. Together, taxation and expenditure changes will determine the overall impact of fiscal consolidation - this can be shown by looking at changes in the cyclically adjusted primary balance, something we will do later on. 
+
+Public expenditure comprises two main types: current and capital. Current expenditure is “Spending on items that are 'consumed' in the year of purchase, such as public sector salaries and transfers.” Capital expenditure is spending on new capital assets such as infrastructure (roads, bridges, flood defences etc.), hospital buildings and equipment, school buildings and equipment, other public buildings, and so on. Capital spending is also called investment and can be either gross or net. Gross investment is total spending on capital assets some of which will be replacing capital which has finally worn out (depreciated). Net investment is capital spending which increases the existing capital stock. Thus net investment equals gross investment less depreciation.
+
+```{r echo=FALSE, fig.cap="UK Deficit/GDP ratio", message=FALSE}
+autoplot(UKAust75[,"rcexp"]) + ggtitle("UK Public Sector Current Expenditure\n(£ billion, 2017-18 prices), 1975-76 to 2018-19") + ylab("£ billion") + xlab("") + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2010, y = 350, label = 'Source: OBR') + scale_x_continuous(limits=c(1975,2020), breaks=seq(1975,2020,by=5))
+```
+
