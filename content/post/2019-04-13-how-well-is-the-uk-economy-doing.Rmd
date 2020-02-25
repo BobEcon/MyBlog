@@ -3,6 +3,9 @@ title: How well is the UK economy doing?
 author: Bob Beachill
 date: '2019-04-13'
 slug: how-well-is-the-uk-economy-doing
+output:
+  blogdown::html_page:
+    toc: true
 categories:
   - UK Economy
 tags:

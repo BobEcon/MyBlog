@@ -3,6 +3,9 @@ title: Some facts (and myths) about government deficits and debt
 author: Bob Beachill
 date: '2019-08-07'
 slug: some-facts-and-myhs-about-government-deficits-and-debt
+output:
+  blogdown::html_page:
+    toc: true
 categories:
   - UK Economy
   - Government
