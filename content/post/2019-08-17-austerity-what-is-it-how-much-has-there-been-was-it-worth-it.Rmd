@@ -3,6 +3,9 @@ title: Austerity; What is it, how much has there been, was it worth it?
 author: Bob Beachill
 date: '2019-08-17'
 slug: austerity-what-is-it-how-much-has-there-been-was-it-worth-it
+output:
+  blogdown::html_page:
+    toc: true
 categories:
   - UK Economy
   - Government
