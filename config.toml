@@ -21,6 +21,7 @@ theme = "hugo-tranquilpeak-theme"
 # googleAnalytics = "UA-123-45"
 paginate = 7
 canonifyurls = true
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [permalinks]
   post = "/:year/:month/:slug/"
@@ -31,7 +32,7 @@ canonifyurls = true
   archive = "archives"
 
 [author]
-  name = "Bob Beachill"
+  name = "Bob Beachill's Economics Blog"
   bio = "Hi. My name is Bob Beachill. I’m a (semi) retired university lecturer in economics"
   job = "Retired!"
   location = "United Kingdom"
@@ -39,7 +40,7 @@ canonifyurls = true
   # gravatarEmail = "thibaud.lepretre@gmail.com"
   # Your profile picture
   # Overwritten by your gravatar image if `author.gravatarEmail` is filled
-  picture = "images/PicOfMe.jpg"
+  picture = "images/PicOfMe-squashed.jpg"
   # Your Twitter username without the @. E.g : thibaudlepretre
   # twitter = "thibaudlepretre"
   # Your google plus profile id. E.g : +ThibaudLepretre or 114625208755123718311
