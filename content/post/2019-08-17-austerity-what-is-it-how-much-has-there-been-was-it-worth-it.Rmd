@@ -52,3 +52,10 @@ Looking first at current spending, figure 1 shows UK public sector **real** curr
 autoplot(UKAust75[,"rcexp"]) + ggtitle("UK Public Sector Current Expenditure\n(£ billion, 2017-18 prices), 1975-76 to 2018-19") + ylab("£ billion") + xlab("") + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2010, y = 350, label = 'Source: OBR') + scale_x_continuous(limits=c(1975,2020), breaks=seq(1975,2020,by=5))
 ```
 
+In fact, the impact of austerity has been even greater than figure 1 suggests, as looking at the level of real expenditure alone doesn’t take into account the effect of population growth. A better measure to consider when assessing the impact of the austerity measures is real expenditure *per head of population*. Figure 2 uses the same data as figure 1, but this time these values have been divided by the UK population for each year^{Specifically, these are the mid-year estimates of the UK population (Source: ONS, code UKPOP). Again the contrast between the periods before and after 2010-11 is striking. Prior to 2010 the growth in current spending outpaced population growth such that expenditure per capita increased at a consistent rate; since 2010 it has not kept pace and real spending per head has fallen significantly. In 2018-19 real UK public sector current expenditure per head was 5.5% lower than in 2010-11.
+
+```{r echo=FALSE, fig.cap="UK Real Current Expenditure per capita", message=FALSE}
+currexppop <- ts(UKAust75[,"rcexp"]/UKAust75[,"ukpop"], start = 1975)
+currexppop <- currexppop*1e+09
+autoplot(currexppop) + ggtitle("UK Public Sector Current Expenditure\n(£ per capita, 2017-18 prices), 1975-76 to 2018-19") + ylab("£ billion") + xlab("") + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2010, y = 6000, label = 'Source: OBR') + scale_x_continuous(limits=c(1975,2020), breaks=seq(1975,2020,by=5))
+```
