@@ -1,5 +1,5 @@
 {
-    "path" : "~/myblog/themes/hugo-tranquilpeak-theme/src/scss/utils",
+    "path" : "~/myblog/content/post",
     "sortOrder" : [
         {
             "ascending" : false,
