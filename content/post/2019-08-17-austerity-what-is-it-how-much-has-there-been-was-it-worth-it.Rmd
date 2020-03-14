@@ -59,3 +59,27 @@ currexppop <- ts(UKAust75[,"rcexp"]/UKAust75[,"ukpop"], start = 1975)
 currexppop <- currexppop*1e+09
 autoplot(currexppop) + ggtitle("UK Public Sector Current Expenditure\n(£ per capita, 2017-18 prices), 1975-76 to 2018-19") + ylab("£ billion") + xlab("") + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2010, y = 6000, label = 'Source: OBR') + scale_x_continuous(limits=c(1975,2020), breaks=seq(1975,2020,by=5))
 ```
+
+### Capital Expenditure
+Turning now to UK public sector real capital (investment) expenditure, figures 3 and 4 show real net investment in overall terms and per head of population respectively. Both charts show a similar picture. Net investment by the public sector is much more volatile than current spending with significant fluctuations in the 1980s and 1990s.
+
+```{r echo=FALSE, fig.cap="UK Real Capital Expenditure", message=FALSE}
+autoplot(UKAust75[,"rnetinv"]) + ggtitle("UK Public Sector Net Investment\n(£ billion, 2017-18 prices), 1975-76 to 2018-19") + ylab("£ billion") + xlab("") + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2010, y = 25, label = 'Source: OBR') + scale_x_continuous(limits=c(1975,2020), breaks=seq(1975,2020,by=5))
+```
+
+However, the 2000s saw a sustained rise from a low of £218 per capita in 2000-01 to a high of £1000 per person in 2008-09. Then in the period of austerity from 2010-11 to 2013-14, public net investment was cut significantly reaching a low of about £510 per head. It has since risen again, with some fluctuations, back up to £615 per capita in 2018-19, but still well below the level reached before the austerity policy began.^[Remember all these figures are in 2017-18 prices]
+
+```{r echo=FALSE, fig.cap="UK Real Capital Expenditure per capita", message=FALSE}
+netinvppop <- ts(UKAust75[,"rnetinv"]/UKAust75[,"ukpop"], start = 1975)
+netinvppop <- netinvppop*1e+09
+autoplot(netinvppop) + ggtitle("UK Public Sector Net Investment\n(£ per capita, 2017-18 prices), 1975-76 to 2018-19") + ylab("£ billion") + xlab("") + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2010, y = 250, label = 'Source: OBR') + scale_x_continuous(limits=c(1975,2020), breaks=seq(1975,2020,by=5))
+```
+
+### Overall Impact
+It's clear, then, that as far as public expenditure is concerned a great deal of cutting back has taken place in the UK since 2010. It has been particularly marked in the case of capital spending, which is often the case.^[It’s easier to cancel or cut back on capital projects rather than cut the wages or numbers of public sector employees] But, recalling the definition of austerity given above, what was the overall impact of these fiscal consolidation measures, which also included some tax rises, on aggregate expenditure and hence GDP? A common method of assessing the total effect of fiscal policy changes is to look at changes in the cyclically-adjusted, primary balance (measured  as a percent of GDP). The primary balance is the difference between the public sector’s income and expenditure, excluding interest payments on the public sector’s debt. “Cyclical-adjusted” means that it is a measure of what the primary balance would be if the economy was at its potential, full employment level of GDP. An increase in the deficit (or fall in the surplus) is an indication of a more expansionary fiscal policy (or expansionary fiscal stance as it’s often called). Conversely, a fall in the deficit (rise in the surplus) indicates a more contractionary fiscal stance.
+
+```{r echo=FALSE, fig.cap="UK Cyclically-adjusted Primary Balance", message=FALSE}
+autoplot(UKAust75[,"cycpbalgdp"]) + ggtitle("UK Cyclically Adjusted Primary Balance\n(Percent of GDP), 1975-76 to 2018-19") + ylab("Percent") + xlab("") + theme(plot.title=element_text(size=12, family="Verdana", face="bold", colour="#2A62C0")) + annotate("label", x = 2010, y = 1.0, label = 'Source: OBR') + scale_x_continuous(limits=c(1975,2020), breaks=seq(1975,2020,by=5))
+```
+
+Figure 5 makes two things very clear. Firstly, the initial response of the UK government to the financial crisis and the Great Recession that followed was to initiate a significant fiscal expansion aimed at propping up aggregate demand once the conventional monetary policy response of cutting interest rates had reached the ZLB. So, the cyclical-adjusted balance went from -2.0 % of GDP in 2007-08 to -6.3% in 2009-10. Secondly, the move to an equally significant (if not more so) fiscal contraction (“the turn to austerity”) from 2010-11 onwards. Apart from a couple of temporary reversals in 2012-13 and 2014-15, the cyclically-adjusted primary deficit has been reduced from -6.3% in 2009-10 to only -0.4% in 2018-19.
